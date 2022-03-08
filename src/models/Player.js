@@ -1,6 +1,6 @@
 const mongoose = require ('mongoose') 
 
-const Player = mongoose.model('Player', { // exportando os dados e criando um modelo
+const Player = mongoose.model('Player', {
   name: String,
   team: String, 
   approved: Boolean

@@ -1,16 +1,11 @@
 const router = require('express').Router() 
-// usando o Router do Express para indicar uma rota
 const Player = require('../models/Player') 
-// usando o path de Player, nossas informações que se transformam num model
 
 router.post('/', async (req, res) => { 
-  // um verbo post, para criar dados novos 
 
-    const { name, team, approved } = req.body 
-    // falando que os dados de const estão na requisição do body
+  const { name, team, approved } = req.body 
 
   const player = { 
-    // listando os dados de player por aqui
     name, 
     team, 
     approved
@@ -18,15 +13,12 @@ router.post('/', async (req, res) => {
 
   if (!name || !team || !approved) {
     res.status(422).json({message: 'O nome é obrigatório'}) 
-    // se não tiver nome, mande uma mensagem
   }
 
   try {
     
     await Player.create(player) 
-    // cria uma coluna via mongoose com os dados passados em player
     res.status(201).json({message: 'Jogador adicionado com sucesso'})
-    // mensagem criada quando se adiciona via post
   } 
   
   catch (error) {
@@ -34,8 +26,6 @@ router.post('/', async (req, res) => {
   }
 
 })
-
-// consultar dados
 
 router.get('/', async (req,res) => {
   try {
@@ -49,7 +39,6 @@ router.get('/', async (req,res) => {
   }
 } )
 
-// consultar apenas um dado, pelo ID passado
 
 router.get('/:id', async (req,res) => {
   const id = req.params.id
@@ -62,8 +51,6 @@ router.get('/:id', async (req,res) => {
 
   }
 })
-
-// modificar ou atualizar um dado
 
 router.patch('/:id', async (req, res) => {  
   const id = req.params.id
